@@ -1,217 +1,259 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>قائمة سور القرآن الكريم مع التقدم والتقارير</title>
-<style>
-  body { font-family: Arial, sans-serif; background-color: #121212; color: #e0e0e0; padding: 1rem; }
-  h1 { text-align: center; margin-bottom: 0.5rem; }
-  #progress-container { background-color: #333; border-radius: 5px; overflow: hidden; margin: 0.5rem 0; }
-  #progress-bar { background-color: #4CAF50; height: 20px; width: 0%; transition: width 0.3s; }
-  #progress-text { text-align: center; margin-bottom: 0.5rem; }
-  #goal-input { width: 60px; text-align: center; margin-left: 0.5rem; border-radius: 3px; border: none; padding: 2px; }
-  label { display: flex; align-items: center; justify-content: space-between; font-size: 1.1rem;
-          padding: 0.5rem; margin-bottom: 0.2rem; border-radius: 5px; transition: background-color 0.3s; }
-  input[type="checkbox"] { transform: scale(1.4); margin-left: 0.3rem; }
-  .even { background-color: #1e1e1e; }
-  .odd { background-color: #2a2a2a; }
-  .checked-1 { background-color: #2e7d32 !important; }
-  .checked-2 { background-color: #1565c0 !important; }
-  .checked-3 { background-color: #ef6c00 !important; }
-  button { display: block; margin: 0.5rem auto; padding: 0.5rem 1rem; font-size: 1rem;
-           border: none; border-radius: 5px; background-color: #4CAF50; color: white; }
-  #history { margin-top:1rem; background:#1e1e1e; padding:0.5rem; border-radius:5px; }
-  select { margin-left: 0.5rem; padding: 2px; border-radius: 3px; }
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>قائمة سور القرآن الكريم مع التقدم والتقارير</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #121212;
+      color: #e0e0e0;
+      padding: 1rem;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 0.5rem;
+    }
+
+    #progress-container {
+      background-color: #333;
+      border-radius: 5px;
+      overflow: hidden;
+      margin: 0.5rem 0;
+    }
+
+    #progress-bar {
+      background-color: #4CAF50;
+      height: 20px;
+      width: 0%;
+      transition: width 0.3s;
+    }
+
+    #progress-text {
+      text-align: center;
+      margin-bottom: 0.5rem;
+    }
+
+    #goal-input {
+      width: 60px;
+      text-align: center;
+      margin-left: 0.5rem;
+      border-radius: 3px;
+      border: none;
+      padding: 2px;
+    }
+
+    label {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 1.1rem;
+      padding: 0.5rem;
+      margin-bottom: 0.2rem;
+      border-radius: 5px;
+      transition: background-color 0.3s;
+    }
+
+    input[type="checkbox"] {
+      transform: scale(1.4);
+      margin-left: 0.3rem;
+    }
+
+    .even {
+      background-color: #1e1e1e;
+    }
+
+    .odd {
+      background-color: #2a2a2a;
+    }
+
+    .checked-1 {
+      background-color: #2e7d32 !important;
+    }
+
+    .checked-2 {
+      background-color: #1565c0 !important;
+    }
+
+    .checked-3 {
+      background-color: #ef6c00 !important;
+    }
+
+    button {
+      display: block;
+      margin: 0.5rem auto;
+      padding: 0.5rem 1rem;
+      font-size: 1rem;
+      border: none;
+      border-radius: 5px;
+      background-color: #4CAF50;
+      color: white;
+    }
+
+    select {
+      margin-left: 0.5rem;
+      padding: 2px;
+      border-radius: 3px;
+    }
+  </style>
 </head>
+
 <body>
-<h1>قائمة سور القرآن الكريم</h1>
+  <h1>قائمة سور القرآن الكريم</h1>
 
-<div style="text-align:center; margin-bottom:0.5rem;">
-  الهدف: <input id="goal-input" type="number" min="1" value="60"> صفحات
-</div>
-<div style="text-align:center; margin-bottom:0.5rem;">
-  مجموعة الإضافة الحالية: 
-  <select id="option-select">
-    <option value="1">1</option>
-    <option value="2">2</option>
-    <option value="3">3</option>
-  </select>
-</div>
+  <div style="text-align:center; margin-bottom:0.5rem;">
+    الهدف: <input id="goal-input" type="number" min="1" value="60"> صفحات
+  </div>
+  <div style="text-align:center; margin-bottom:0.5rem;">
+    مجموعة الإضافة الحالية:
+    <select id="option-select">
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+    </select>
+  </div>
 
-<div id="progress-text">تمت قراءة 0 من 60 صفحة (0%)</div>
-<div id="progress-container"><div id="progress-bar"></div></div>
+  <div id="progress-text">تمت قراءة 0 من 60 صفحة (0%)</div>
+  <div id="progress-container">
+    <div id="progress-bar"></div>
+  </div>
 
-<form id="surahForm"></form>
-<button type="button" onclick="newDay()">بدء يوم جديد بنفس السور</button>
-<button type="button" onclick="clearAll()">مسح الكل</button>
+  <form id="surahForm"></form>
+  <button type="button" onclick="clearAll()">مسح الكل</button>
 
-<div id="history">
-  <h3>التقرير اليومي</h3>
-  <div id="history-list">يتم التحميل...</div>
-</div>
+  <script>
+    const todayDate = new Date().toISOString().slice(0, 10);
+    let goalPages = parseInt(document.getElementById('goal-input').value) || 60;
+    let selectedOption = document.getElementById('option-select').value;
 
-<script>
-const todayDate = new Date().toISOString().slice(0,10);
-let goalPages = parseInt(document.getElementById('goal-input').value) || 60;
-let selectedOption = document.getElementById('option-select').value;
+    const surahs = [
+      { name: "الفاتحة", pages: 1, juz: 1 }, { name: "البقرة", pages: 48, juz: 1 }, { name: "آل عمران", pages: 27, juz: 3 },
+      { name: "النساء", pages: 29, juz: 4 }, { name: "المائدة", pages: 22, juz: 6 }, { name: "الأنعام", pages: 23, juz: 7 },
+      { name: "الأعراف", pages: 26, juz: 8 }, { name: "الأنفال", pages: 10, juz: 9 }, { name: "التوبة", pages: 21, juz: 10 },
+      { name: "يونس", pages: 13, juz: 11 }, { name: "هود", pages: 14, juz: 12 }, { name: "يوسف", pages: 14, juz: 12 },
+      { name: "الرعد", pages: 6, juz: 13 }, { name: "إبراهيم", pages: 7, juz: 13 }, { name: "الحجر", pages: 5, juz: 14 },
+      { name: "النحل", pages: 15, juz: 14 }, { name: "الإسراء", pages: 11, juz: 15 }, { name: "الكهف", pages: 12, juz: 15 },
+      { name: "مريم", pages: 7, juz: 16 }, { name: "طه", pages: 10, juz: 16 }, { name: "الأنبياء", pages: 10, juz: 17 },
+      { name: "الحج", pages: 10, juz: 17 }, { name: "المؤمنون", pages: 8, juz: 18 }, { name: "النور", pages: 9, juz: 18 },
+      { name: "الفرقان", pages: 8, juz: 19 }, { name: "الشعراء", pages: 10, juz: 19 }, { name: "النمل", pages: 8, juz: 19 },
+      { name: "القصص", pages: 11, juz: 20 }, { name: "العنكبوت", pages: 8, juz: 20 }, { name: "الروم", pages: 7, juz: 21 },
+      { name: "لقمان", pages: 4, juz: 21 }, { name: "السجدة", pages: 3, juz: 21 }, { name: "الأحزاب", pages: 10, juz: 21 },
+      { name: "سبأ", pages: 6, juz: 22 }, { name: "فاطر", pages: 6, juz: 22 }, { name: "يس", pages: 6, juz: 22 },
+      { name: "الصافات", pages: 7, juz: 23 }, { name: "ص", pages: 5, juz: 23 }, { name: "الزمر", pages: 9, juz: 23 },
+      { name: "غافر", pages: 10, juz: 24 }, { name: "فصلت", pages: 6, juz: 24 }, { name: "الشورى", pages: 6, juz: 25 },
+      { name: "الزخرف", pages: 7, juz: 25 }, { name: "الدخان", pages: 3, juz: 25 }, { name: "الجاثية", pages: 3, juz: 25 },
+      { name: "الأحقاف", pages: 5, juz: 26 }, { name: "محمد", pages: 4, juz: 26 }, { name: "الفتح", pages: 4, juz: 26 },
+      { name: "الحجرات", pages: 3, juz: 26 }, { name: "ق", pages: 2, juz: 26 }, { name: "الذاريات", pages: 3, juz: 27 },
+      { name: "الطور", pages: 3, juz: 27 }, { name: "النجم", pages: 2, juz: 27 }, { name: "القمر", pages: 3, juz: 27 },
+      { name: "الرحمن", pages: 3, juz: 27 }, { name: "الواقعة", pages: 3, juz: 27 }, { name: "الحديد", pages: 5, juz: 27 },
+      { name: "المجادلة", pages: 3, juz: 28 }, { name: "الحشر", pages: 4, juz: 28 }, { name: "الممتحنة", pages: 2, juz: 28 },
+      { name: "الصف", pages: 2, juz: 28 }, { name: "الجمعة", pages: 1, juz: 28 }, { name: "المنافقون", pages: 2, juz: 28 },
+      { name: "التغابن", pages: 2, juz: 28 }, { name: "الطلاق", pages: 2, juz: 28 }, { name: "التحريم", pages: 2, juz: 28 },
+      { name: "الملك", pages: 2, juz: 29 }, { name: "القلم", pages: 2, juz: 29 }, { name: "الحاقة", pages: 2, juz: 29 },
+      { name: "المعارج", pages: 2, juz: 29 }, { name: "نوح", pages: 2, juz: 29 }, { name: "الجن", pages: 2, juz: 29 },
+      { name: "المزمل", pages: 1, juz: 29 }, { name: "المدثر", pages: 2, juz: 29 }, { name: "القيامة", pages: 1, juz: 29 },
+      { name: "الإنسان", pages: 2, juz: 29 }, { name: "المرسلات", pages: 2, juz: 29 }, { name: "النبأ", pages: 1, juz: 30 },
+      { name: "النازعات", pages: 2, juz: 30 }, { name: "عبس", pages: 1, juz: 30 }, { name: "التكوير", pages: 1, juz: 30 },
+      { name: "الإنفطار", pages: 1, juz: 30 }, { name: "المطففين", pages: 2, juz: 30 }, { name: "الانشقاق", pages: 1, juz: 30 },
+      { name: "البروج", pages: 1, juz: 30 }, { name: "الطارق", pages: 1, juz: 30 }, { name: "الأعلى", pages: 1, juz: 30 },
+      { name: "الغاشية", pages: 1, juz: 30 }, { name: "الفجر", pages: 1, juz: 30 }, { name: "البلد", pages: 1, juz: 30 },
+      { name: "الشمس", pages: 1, juz: 30 }, { name: "الليل", pages: 1, juz: 30 }, { name: "الضحى", pages: 1, juz: 30 },
+      { name: "الشرح", pages: 1, juz: 30 }, { name: "التين", pages: 1, juz: 30 }, { name: "العلق", pages: 1, juz: 30 },
+      { name: "القدر", pages: 1, juz: 30 }, { name: "البينة", pages: 1, juz: 30 }, { name: "الزلزلة", pages: 1, juz: 30 },
+      { name: "العاديات", pages: 1, juz: 30 }, { name: "القارعة", pages: 1, juz: 30 }, { name: "التكاثر", pages: 1, juz: 30 },
+      { name: "العصر", pages: 1, juz: 30 }, { name: "الهمزة", pages: 1, juz: 30 }, { name: "الفيل", pages: 1, juz: 30 },
+      { name: "قريش", pages: 1, juz: 30 }, { name: "الماعون", pages: 1, juz: 30 }, { name: "الكوثر", pages: 1, juz: 30 },
+      { name: "الكافرون", pages: 1, juz: 30 }, { name: "النصر", pages: 1, juz: 30 }, { name: "المسد", pages: 1, juz: 30 },
+      { name: "الإخلاص", pages: 1, juz: 30 }, { name: "الفلق", pages: 1, juz: 30 }, { name: "الناس", pages: 1, juz: 30 }
+    ];
 
-const surahs = [
-  {name:"الفاتحة", pages:1, juz:1},{name:"البقرة", pages:48, juz:1},{name:"آل عمران", pages:27, juz:3},
-  {name:"النساء", pages:29, juz:4},{name:"المائدة", pages:22, juz:6},{name:"الأنعام", pages:23, juz:7},
-  {name:"الأعراف", pages:26, juz:8},{name:"الأنفال", pages:10, juz:9},{name:"التوبة", pages:21, juz:10},
-  {name:"يونس", pages:13, juz:11},{name:"هود", pages:14, juz:12},{name:"يوسف", pages:14, juz:12},
-  {name:"الرعد", pages:6, juz:13},{name:"إبراهيم", pages:7, juz:13},{name:"الحجر", pages:5, juz:14},
-  {name:"النحل", pages:15, juz:14},{name:"الإسراء", pages:11, juz:15},{name:"الكهف", pages:12, juz:15},
-  {name:"مريم", pages:7, juz:16},{name:"طه", pages:10, juz:16},{name:"الأنبياء", pages:10, juz:17},
-  {name:"الحج", pages:10, juz:17},{name:"المؤمنون", pages:8, juz:18},{name:"النور", pages:9, juz:18},
-  {name:"الفرقان", pages:8, juz:19},{name:"الشعراء", pages:10, juz:19},{name:"النمل", pages:8, juz:19},
-  {name:"القصص", pages:11, juz:20},{name:"العنكبوت", pages:8, juz:20},{name:"الروم", pages:7, juz:21},
-  {name:"لقمان", pages:4, juz:21},{name:"السجدة", pages:3, juz:21},{name:"الأحزاب", pages:10, juz:21},
-  {name:"سبأ", pages:6, juz:22},{name:"فاطر", pages:6, juz:22},{name:"يس", pages:6, juz:22},
-  {name:"الصافات", pages:7, juz:23},{name:"ص", pages:5, juz:23},{name:"الزمر", pages:9, juz:23},
-  {name:"غافر", pages:10, juz:24},{name:"فصلت", pages:6, juz:24},{name:"الشورى", pages:6, juz:25},
-  {name:"الزخرف", pages:7, juz:25},{name:"الدخان", pages:3, juz:25},{name:"الجاثية", pages:3, juz:25},
-  {name:"الأحقاف", pages:5, juz:26},{name:"محمد", pages:4, juz:26},{name:"الفتح", pages:4, juz:26},
-  {name:"الحجرات", pages:3, juz:26},{name:"ق", pages:2, juz:26},{name:"الذاريات", pages:3, juz:27},
-  {name:"الطور", pages:3, juz:27},{name:"النجم", pages:2, juz:27},{name:"القمر", pages:3, juz:27},
-  {name:"الرحمن", pages:3, juz:27},{name:"الواقعة", pages:3, juz:27},{name:"الحديد", pages:5, juz:27},
-  {name:"المجادلة", pages:3, juz:28},{name:"الحشر", pages:4, juz:28},{name:"الممتحنة", pages:2, juz:28},
-  {name:"الصف", pages:2, juz:28},{name:"الجمعة", pages:1, juz:28},{name:"المنافقون", pages:2, juz:28},
-  {name:"التغابن", pages:2, juz:28},{name:"الطلاق", pages:2, juz:28},{name:"التحريم", pages:2, juz:28},
-  {name:"الملك", pages:2, juz:29},{name:"القلم", pages:2, juz:29},{name:"الحاقة", pages:2, juz:29},
-  {name:"المعارج", pages:2, juz:29},{name:"نوح", pages:2, juz:29},{name:"الجن", pages:2, juz:29},
-  {name:"المزمل", pages:1, juz:29},{name:"المدثر", pages:2, juz:29},{name:"القيامة", pages:1, juz:29},
-  {name:"الإنسان", pages:2, juz:29},{name:"المرسلات", pages:2, juz:29},{name:"النبأ", pages:1, juz:30},
-  {name:"النازعات", pages:2, juz:30},{name:"عبس", pages:1, juz:30},{name:"التكوير", pages:1, juz:30},
-  {name:"الإنفطار", pages:1, juz:30},{name:"المطففين", pages:2, juz:30},{name:"الانشقاق", pages:1, juz:30},
-  {name:"البروج", pages:1, juz:30},{name:"الطارق", pages:1, juz:30},{name:"الأعلى", pages:1, juz:30},
-  {name:"الغاشية", pages:1, juz:30},{name:"الفجر", pages:1, juz:30},{name:"البلد", pages:1, juz:30},
-  {name:"الشمس", pages:1, juz:30},{name:"الليل", pages:1, juz:30},{name:"الضحى", pages:1, juz:30},
-  {name:"الشرح", pages:1, juz:30},{name:"التين", pages:1, juz:30},{name:"العلق", pages:1, juz:30},
-  {name:"القدر", pages:1, juz:30},{name:"البينة", pages:1, juz:30},{name:"الزلزلة", pages:1, juz:30},
-  {name:"العاديات", pages:1, juz:30},{name:"القارعة", pages:1, juz:30},{name:"التكاثر", pages:1, juz:30},
-  {name:"العصر", pages:1, juz:30},{name:"الهمزة", pages:1, juz:30},{name:"الفيل", pages:1, juz:30},
-  {name:"قريش", pages:1, juz:30},{name:"الماعون", pages:1, juz:30},{name:"الكوثر", pages:1, juz:30},
-  {name:"الكافرون", pages:1, juz:30},{name:"النصر", pages:1, juz:30},{name:"المسد", pages:1, juz:30},
-  {name:"الإخلاص", pages:1, juz:30},{name:"الفلق", pages:1, juz:30},{name:"الناس", pages:1, juz:30}
-];
+    const form = document.getElementById('surahForm');
+    const progressText = document.getElementById('progress-text');
+    const progressBar = document.getElementById('progress-bar');
+    const goalInput = document.getElementById('goal-input');
+    const optionSelect = document.getElementById('option-select');
 
-const form = document.getElementById('surahForm');
-const progressText = document.getElementById('progress-text');
-const progressBar = document.getElementById('progress-bar');
-const goalInput = document.getElementById('goal-input');
-const historyList = document.getElementById('history-list');
-const optionSelect = document.getElementById('option-select');
-
-optionSelect.addEventListener('change', () => {
-  selectedOption = optionSelect.value;
-  updateFormColors(); updateProgress();
-});
-
-goalInput.addEventListener('input', () => {
-  goalPages = parseInt(goalInput.value) || 1;
-  updateProgress();
-});
-
-renderForm();
-updateProgress(); updateHistory();
-
-function renderForm(){
-  form.innerHTML = '';
-  surahs.forEach((s, idx) => {
-    const label = document.createElement('label');
-    label.className = idx % 2 === 0 ? 'even' : 'odd';
-
-    const checkbox = document.createElement('input');
-    checkbox.type = 'checkbox'; checkbox.id = `surah-${idx+1}`;
-
-    let datesCurrent = JSON.parse(localStorage.getItem(`surah-${idx+1}-${selectedOption}`) || "[]");
-    checkbox.checked = datesCurrent.includes(todayDate);
-
-    checkbox.addEventListener('change', () => {
-      const id = `surah-${idx+1}-${selectedOption}`;
-      let dates = JSON.parse(localStorage.getItem(id) || "[]");
-      if(checkbox.checked){
-        if(!dates.includes(todayDate)){dates.push(todayDate);}
-      }else{
-        dates = dates.filter(d => d !== todayDate);
-      }
-      localStorage.setItem(id, JSON.stringify(dates));
-      updateFormColors(); updateProgress(); updateHistory();
+    optionSelect.addEventListener('change', () => {
+      selectedOption = optionSelect.value;
+      updateFormColors(); updateProgress();
     });
 
-    label.appendChild(document.createTextNode(`[${s.juz}] ${s.name} – ${s.pages}`));
-    label.appendChild(checkbox);
-    form.appendChild(label);
-  });
-  updateFormColors();
-}
+    goalInput.addEventListener('input', () => {
+      goalPages = parseInt(goalInput.value) || 1;
+      updateProgress();
+    });
 
-function updateFormColors(){
-  surahs.forEach((s, idx) => {
-    const label = document.querySelectorAll('label')[idx];
-    label.classList.remove('checked-1','checked-2','checked-3');
-    for(let opt=1; opt<=3; opt++){
-      const id = `surah-${idx+1}-${opt}`;
-      let dates = JSON.parse(localStorage.getItem(id) || "[]");
-      if(dates.includes(todayDate)){
-        label.classList.add(`checked-${opt}`);
-      }
+    renderForm();
+    updateProgress();
+
+    function renderForm() {
+      form.innerHTML = '';
+      surahs.forEach((s, idx) => {
+        const label = document.createElement('label');
+        label.className = idx % 2 === 0 ? 'even' : 'odd';
+
+        const checkbox = document.createElement('input');
+        checkbox.type = 'checkbox'; checkbox.id = `surah-${idx + 1}`;
+
+        checkbox.checked = localStorage.getItem(`surah-${idx + 1}-${selectedOption}`) ? true : false;
+
+        checkbox.addEventListener('change', () => {
+          const id = `surah-${idx + 1}-${selectedOption}`;
+          if (checkbox.checked) {
+            localStorage.setItem(id, "true");
+          } else {
+            localStorage.removeItem(id);
+          }
+
+
+          updateFormColors(); updateProgress();
+        });
+
+        label.appendChild(document.createTextNode(`[${s.juz}] ${s.name} – ${s.pages}`));
+        label.appendChild(checkbox);
+        form.appendChild(label);
+      });
+      updateFormColors();
     }
-  });
-}
 
-function updateProgress(){
-  let totalPagesReadToday=0;
-  surahs.forEach((s, idx)=>{
-    const id=`surah-${idx+1}-${selectedOption}`;
-    let dates=JSON.parse(localStorage.getItem(id)||"[]");
-    if(dates.includes(todayDate)){
-      totalPagesReadToday+=s.pages;
-    }
-  });
-  const percent = Math.min((totalPagesReadToday / goalPages) * 100, 100);
-  progressBar.style.width = percent + "%";
-  progressText.textContent = `تمت قراءة ${totalPagesReadToday} من ${goalPages} صفحة (${percent.toFixed(1)}%)`;
-}
-
-function clearAll(){
-  surahs.forEach((_, idx) => {
-    const id = `surah-${idx+1}-${selectedOption}`;
-    localStorage.removeItem(id);
-  });
-  renderForm(); updateProgress(); updateHistory();
-}
-
-function newDay(){
-  surahs.forEach((s, idx) => {
-    const id = `surah-${idx+1}-${selectedOption}`;
-    let dates=JSON.parse(localStorage.getItem(id)||"[]");
-    if(!dates.includes(todayDate)){
-      dates.push(todayDate);
-      localStorage.setItem(id, JSON.stringify(dates));
-    }
-  });
-  renderForm(); updateProgress(); updateHistory();
-}
-
-function updateHistory(){
-  let allDates={};
-  surahs.forEach((s, idx) => {
-    for(let opt=1; opt<=3; opt++){
-      const id = `surah-${idx+1}-${opt}`;
-      let dates=JSON.parse(localStorage.getItem(id)||"[]");
-      dates.forEach(date => {
-        if(!allDates[date]) allDates[date]=0;
-        allDates[date]+=s.pages;
+    function updateFormColors() {
+      surahs.forEach((s, idx) => {
+        const label = document.querySelectorAll('label')[idx];
+        label.classList.remove('checked-1', 'checked-2', 'checked-3');
+        for (let opt = 1; opt <= 3; opt++) {
+          const id = `surah-${idx + 1}-${opt}`;
+          if (localStorage.getItem(id)) {
+            label.classList.add(`checked-${opt}`);
+          }
+        }
       });
     }
-  });
-  let sorted=Object.keys(allDates).sort((a,b)=>b.localeCompare(a));
-  historyList.innerHTML=sorted.map(d=>`<div>${d}: ${allDates[d]} صفحات</div>`).join('');
-}
-</script>
+
+    function updateProgress() {
+      let totalPagesReadToday = 0;
+      surahs.forEach((s, idx) => {
+        const id = `surah-${idx + 1}-${selectedOption}`;
+        if (localStorage.getItem(id)) {
+          totalPagesReadToday += s.pages;
+        }
+      });
+      const percent = Math.min((totalPagesReadToday / goalPages) * 100, 100);
+      progressBar.style.width = percent + "%";
+      progressText.textContent = `تمت قراءة ${totalPagesReadToday} من ${goalPages} صفحة (${percent.toFixed(1)}%)`;
+    }
+
+    function clearAll() {
+      surahs.forEach((_, idx) => {
+        const id = `surah-${idx + 1}-${selectedOption}`;
+        localStorage.removeItem(id);
+      });
+      renderForm(); updateProgress();
+    }
+
+  </script>
 </body>
+
 </html>
