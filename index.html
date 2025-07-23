@@ -18,6 +18,15 @@
       margin-bottom: 0.5rem;
     }
 
+    #progress-wrapper {
+      position: sticky;
+      top: 0;
+      background-color: #121212;
+      z-index: 1000;
+      padding-bottom: 0.5rem;
+    }
+
+
     #progress-container {
       background-color: #333;
       border-radius: 5px;
@@ -116,10 +125,13 @@
     </select>
   </div>
 
-  <div id="progress-text">تمت قراءة 0 من 60 صفحة (0%)</div>
-  <div id="progress-container">
-    <div id="progress-bar"></div>
+  <div id="progress-wrapper">
+    <div id="progress-text">تمت قراءة 0 من 60 صفحة (0%)</div>
+    <div id="progress-container">
+      <div id="progress-bar"></div>
+    </div>
   </div>
+
 
   <form id="surahForm"></form>
   <button type="button" onclick="clearAll()">مسح الكل</button>
